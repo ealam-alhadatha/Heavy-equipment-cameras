@@ -1,989 +1,244 @@
-
-
-
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>أنظمة كاميرات المعدات الثقيلة | الأمان المتكامل</title>
-
     <!-- استدعاء خط Cairo من جوجل ليعطي طابعاً احترافياً وحديثاً -->
-
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-
     <style>
-
         :root {
-
             --primary-color: #1e293b; /* أزرق داكن */
-
             --secondary-color: #f59e0b; /* أصفر/برتقالي للمقاولات */
-
             --accent-color: #dc2626; /* أحمر للتنبيهات */
-
             --bg-color: #f8fafc;
-
             --text-color: #334155;
-
             --white: #ffffff;
-
         }
-
-
 
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
             font-family: 'Cairo', sans-serif;
-
         }
-
-
 
         body {
-
             background-color: var(--bg-color);
-
             color: var(--text-color);
-
             line-height: 1.6;
-
         }
-
-
 
         /* شريط التنقل (Header) */
-
         header {
-
             background-color: var(--primary-color);
-
             color: var(--white);
-
             padding: 1rem 5%;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             position: sticky;
-
             top: 0;
-
             z-index: 1000;
-
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-
         }
-
-
 
         .logo {
-
             font-size: 1.5rem;
-
             font-weight: 800;
-
             color: var(--secondary-color);
-
         }
-
-
 
         .contact-btn {
-
             background-color: var(--secondary-color);
-
             color: var(--white);
-
             padding: 0.6rem 1.5rem;
-
             text-decoration: none;
-
             border-radius: 5px;
-
             font-weight: 700;
-
             transition: background 0.3s ease;
-
             font-size: 1.1rem;
-
             display: inline-block;
-
             text-align: center;
-
         }
-
-
 
         .contact-btn:hover {
-
             background-color: #d97706;
-
         }
-
-
 
         /* القسم الرئيسي (Hero Section) */
-
         .hero {
-
             display: flex;
-
             flex-wrap: wrap;
-
             align-items: center;
-
             justify-content: space-between;
-
             padding: 4rem 5%;
-
             background: linear-gradient(135deg, var(--primary-color) 0%, #334155 100%);
-
             color: var(--white);
-
             gap: 2rem;
-
         }
-
-
 
         .hero-content {
-
             flex: 1 1 400px;
-
         }
-
-
 
         .hero-content h1 {
-
             font-size: 2.8rem;
-
             margin-bottom: 1rem;
-
             line-height: 1.3;
-
             color: var(--secondary-color);
-
         }
-
-
 
         .hero-content p {
-
             font-size: 1.2rem;
-
             margin-bottom: 2rem;
-
             color: #cbd5e1;
-
         }
-
-
 
         .hero-image {
-
             flex: 1 1 400px;
-
             text-align: center;
-
         }
-
-
 
         .hero-image img {
-
             max-width: 100%;
-
             height: auto;
-
             border-radius: 10px;
-
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-
             border: 3px solid var(--secondary-color);
-
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-
+        .hero-image img:hover {
+            transform: scale(1.02);
+        }
 
         /* قسم المميزات (Features) */
-
         .features {
-
             padding: 5rem 5%;
-
             text-align: center;
-
         }
-
-
 
         .features h2 {
-
             font-size: 2.2rem;
-
             color: var(--primary-color);
-
             margin-bottom: 3rem;
-
         }
-
-
 
         .features-grid {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
             gap: 2rem;
-
         }
-
-
 
         .feature-card {
-
             background-color: var(--white);
-
             padding: 2rem;
-
             border-radius: 10px;
-
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-
             transition: transform 0.3s ease;
-
             border-top: 4px solid var(--secondary-color);
-
         }
-
-
 
         .feature-card:hover {
-
             transform: translateY(-10px);
-
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-
         }
-
-
 
         .feature-icon {
-
             font-size: 3rem;
-
             margin-bottom: 1rem;
-
         }
-
-
 
         .feature-card h3 {
-
             font-size: 1.4rem;
-
             color: var(--primary-color);
-
             margin-bottom: 1rem;
-
         }
-
-
 
         /* قسم معرض الصور (Gallery) */
-
         .gallery {
-
             padding: 4rem 5%;
-
             background-color: var(--white);
-
             text-align: center;
-
         }
-
-
 
         .gallery h2 {
-
             font-size: 2.2rem;
-
             color: var(--primary-color);
-
             margin-bottom: 3rem;
-
         }
-
-
 
         .gallery-grid {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
             gap: 1.5rem;
-
         }
-
-
 
         .gallery-item {
-
             overflow: hidden;
-
             border-radius: 10px;
-
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
             border: 2px solid #e2e8f0;
-
         }
-
-
 
         .gallery-item img {
-
             width: 100%;
-
             height: 100%;
-
             object-fit: cover;
-
             display: block;
-
+            cursor: pointer;
             transition: transform 0.3s ease;
-
         }
-
-
 
         .gallery-item:hover img {
-
             transform: scale(1.05);
-
         }
 
-
-
-        /* قسم المطابقة والاعتماد */
-
-        .compliance {
-
-            background-color: #e2e8f0;
-
-            padding: 4rem 5%;
-
-            text-align: center;
-
+        /* نافذة عرض الصورة بالحجم الكامل (Lightbox) */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
         }
 
-
-
-        .compliance h3 {
-
-            font-size: 1.8rem;
-
-            color: var(--primary-color);
-
-            margin-bottom: 1rem;
-
+        .lightbox-modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            object-fit: contain;
         }
 
-
-
-        .compliance p {
-
-            font-size: 1.2rem;
-
-            max-width: 800px;
-
-            margin: 0 auto;
-
-        }
-
-
-
-        /* الفوتر والتواصل */
-
-        footer {
-
-            background-color: var(--primary-color);
-
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            left: 30px;
             color: var(--white);
-
-            text-align: center;
-
-            padding: 3rem 5%;
-
-        }
-
-
-
-        .phone-number {
-
             font-size: 2.5rem;
-
-            font-weight: 800;
-
-            color: var(--secondary-color);
-
-            display: block;
-
-            margin: 1.5rem 0;
-
-            direction: ltr; /* لضمان ظهور الرقم بشكل صحيح */
-
-        }
-
-
-
-        /* ==================================================
-
-           استعلامات الوسائط للهواتف والشاشات الصغيرة (Responsive)
-
-           ================================================== */
-
-        @media (max-width: 768px) {
-
-            /* تعديلات الهيدر */
-
-            header {
-
-                flex-direction: column;
-
-                gap: 1rem;
-
-                padding: 1rem;
-
-            }
-
-           
-
-            .logo {
-
-                font-size: 1.3rem;
-
-            }
-
-           
-
-            header .contact-btn {
-
-                width: 100%; /* زر الاتصال بعرض الشاشة في الجوال */
-
-            }
-
-
-
-            /* تعديلات القسم الرئيسي */
-
-            .hero {
-
-                padding: 2.5rem 5%;
-
-                text-align: center;
-
-            }
-
-
-
-            .hero-content h1 {
-
-                font-size: 2rem;
-
-            }
-
-
-
-            .hero-content p {
-
-                font-size: 1.1rem;
-
-            }
-
-
-
-            .hero-content .contact-btn {
-
-                width: 100%;
-
-                font-size: 1.1rem !important;
-
-                padding: 0.8rem !important;
-
-            }
-
-
-
-            /* تعديلات المسافات للأقسام */
-
-            .features, .gallery, .compliance, footer {
-
-                padding: 2.5rem 5%;
-
-            }
-
-
-
-            .features h2, .gallery h2 {
-
-                font-size: 1.8rem;
-
-                margin-bottom: 2rem;
-
-            }
-
-
-
-            /* جعل شبكة الصور عمودية بالكامل على الجوال */
-
-            .gallery-grid {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-
-            /* تصغير حجم خطوط الفوتر */
-
-            footer h2 {
-
-                font-size: 1.5rem;
-
-            }
-
-           
-
-            .phone-number {
-
-                font-size: 2rem;
-
-            }
-
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-
-
-    <!-- شريط التنقل -->
-
-    <header>
-
-        <div class="logo">أنظمة المراقبة للمعدات</div>
-
-        <a href="tel:0551453595" class="contact-btn">اتصل بنا الآن</a>
-
-    </header>
-
-
-
-    <!-- القسم الرئيسي الواجهة -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <h1>نظام المراقبة الشامل للمعدات الثقيلة والشاحنات</h1>
-
-            <p>أقصى درجات الأمان والتحكم لمعداتك. نظام مراقبة متطور يمنح السائق رؤية محيطية كاملة، ويوفر توثيقاً دقيقاً وتنبيهات استباقية لمنع الحوادث في مواقع العمل.</p>
-
-            <a href="tel:0551453595" class="contact-btn" style="padding: 1rem 2rem; font-size: 1.3rem;">احصل على عرض سعر : 0551453595</a>
-
-        </div>
-
-        <div class="hero-image">
-
-            <img src="images/Screenshot_٢٠٢٦٠١٢٠_١٩٣٤٠٢_AliExpress.png" alt="نظام كاميرات المعدات الثقيلة مع شاشة العرض والـ DVR">
-
-        </div>
-
-    </section>
-
-
-
-    <!-- قسم المواصفات والمميزات -->
-
-    <section class="features">
-
-        <h2>مواصفات النظام</h2>
-
-        <div class="features-grid">
-
-            <div class="feature-card">
-
-                <div class="feature-icon">📷</div>
-
-                <h3>تغطية شاملة بـ 4 عدسات</h3>
-
-                <p>يحتوي النظام على 4 كاميرات عالية الدقة تغطي كافة الزوايا (أمام، يمين، يسار، وخلف المعدة) للقضاء على النقاط العمياء تماماً.</p>
-
-            </div>
-
-           
-
-            <div class="feature-card">
-
-                <div class="feature-icon">🖥️</div>
-
-                <h3>شاشة عرض مقسّمة</h3>
-
-                <p>شاشة عرض واضحة توضع في مقصورة القيادة، تتيح للسائق رؤية الزوايا الأربع في وقت واحد لمراقبة محيط العمل باستمرار.</p>
-
-            </div>
-
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">🔴</div>
-
-                <h3>تسجيل فيديو مستمر</h3>
-
-                <p>جهاز DVR مدمج يقوم بتسجيل وحفظ الفيديو من جميع الكاميرات لتوثيق سير العمل والرجوع إليه في حال وقوع أي طارئ.</p>
-
-            </div>
-
-
-
-            <div class="feature-card" style="border-top-color: var(--accent-color);">
-
-                <div class="feature-icon">🚨</div>
-
-                <h3>تنبيه ذكي واكتشاف للمشاة</h3>
-
-                <p>نظام إنذار مبكر يقوم بتنبيه السائق فوراً في حال اقتراب أي شخص من المعدة أو المركبة، لتفادي الحوادث في مواقع العمل المزدحمة.</p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- قسم معرض الصور والتفاصيل الإضافية -->
-
-    <section class="gallery">
-
-        <h2>معرض صور النظام وتفاصيله</h2>
-
-        <div class="gallery-grid">
-
-            <div class="gallery-item">
-
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٦٠٢_Alibabacom.png" alt="AI Blind Spot Detection">
-
-            </div>
-
-            <div class="gallery-item">
-
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٣٣٦_Temu.png" alt="Suitable for various sizes of vehicles">
-
-            </div>
-
-            <div class="gallery-item">
-
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٤١٢_Temu.png" alt="Package Content and Monitor Dimensions">
-
-            </div>
-
-            <div class="gallery-item">
-
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٤٣٧_Temu.png" alt="4 Channels 360 Without Blind Spots">
-
-            </div>
-
-            <div class="gallery-item">
-
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٥٣٩_Alibabacom.png" alt="10 inch 4CH HD Camera System">
-
-            </div>
-
-            <div class="gallery-item">
-
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٦٣٦_Alibabacom.png" alt="Monitor Interface and Setup">
-
-            </div>
-
-            <div class="gallery-item">
-
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٢٤٠_Temu.png" alt="System Components and Cables">
-
-            </div>
-
-            <div class="gallery-item">
-
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٧٣٥_Alibabacom.png" alt="GPS and Android Features">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- قسم المطابقة والاعتماد -->
-
-    <section class="compliance">
-
-        <h3>معتمد للمشاريع الكبرى</h3>
-
-        <p>هذا النظام <strong>متوافق تماماً مع متطلبات واشتراطات الأمن والسلامة لشركات المقاولات</strong>، مما يجعله الخيار الأمثل لاعتماد معداتك في المشاريع الحكومية والخاصة الكبرى.</p>
-
-    </section>
-
-
-
-    <!-- الفوتر وبيانات التواصل -->
-
-    <footer>
-
-        <h2>لتجهيز معداتك والتوريد، تواصل معنا الآن</h2>
-
-        <p>نحن على استعداد لتلبية متطلبات شركات المقاولات وتجهيز الأساطيل</p>
-
-        <a href="tel:0551453595" class="phone-number" style="text-decoration: none;">0551453595</a>
-
-        <p>&copy; 2026 جميع الحقوق محفوظة.</p>
-
-    </footer>
-
-
-
-</body>
-
-</html>
-
-ملف الـ HTML المعدّل الخاص بك جاهز:
-رمز HTML
-index-modified
- HTML 
-فتح
-
-لقد قمت بتعديل كود الـ CSS في قسم استعلامات الوسائط الخاص بالجوال @media (max-width: 768px).
-تم تغيير grid-template-columns لكل من قسمي المميزات features-grid ومعرض الصور gallery-grid ليصبح repeat(2, 1fr) بدلاً من عمود واحد، مع تصغير الخطوط والحشوات (padding) قليلاً لتناسب العرض الجديد على الشاشات الصغيرة وتجنب تداخل النصوص.
-
-إليك الكود كاملاً بعد التعديل:
-
-
-
-
-‫Gemini هو نموذج ذكاء اصطناعي وقد ينتج عنه أخطاء.
-
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أنظمة كاميرات المعدات الثقيلة | الأمان المتكامل</title>
-    <!-- استدعاء خط Cairo من جوجل ليعطي طابعاً احترافياً وحديثاً -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #1e293b; /* أزرق داكن */
-            --secondary-color: #f59e0b; /* أصفر/برتقالي للمقاولات */
-            --accent-color: #dc2626; /* أحمر للتنبيهات */
-            --bg-color: #f8fafc;
-            --text-color: #334155;
-            --white: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        /* شريط التنقل (Header) */
-        header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 1rem 5%;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--secondary-color);
-        }
-
-        .contact-btn {
-            background-color: var(--secondary-color);
-            color: var(--white);
-            padding: 0.6rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 700;
-            transition: background 0.3s ease;
-            font-size: 1.1rem;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .contact-btn:hover {
-            background-color: #d97706;
-        }
-
-        /* القسم الرئيسي (Hero Section) */
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 4rem 5%;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #334155 100%);
-            color: var(--white);
-            gap: 2rem;
-        }
-
-        .hero-content {
-            flex: 1 1 400px;
-        }
-
-        .hero-content h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-            color: var(--secondary-color);
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #cbd5e1;
-        }
-
-        .hero-image {
-            flex: 1 1 400px;
-            text-align: center;
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-            border: 3px solid var(--secondary-color);
-        }
-
-        /* قسم المميزات (Features) */
-        .features {
-            padding: 5rem 5%;
-            text-align: center;
-        }
-
-        .features h2 {
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background-color: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            border-top: 4px solid var(--secondary-color);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.4rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        /* قسم معرض الصور (Gallery) */
-        .gallery {
-            padding: 4rem 5%;
-            background-color: var(--white);
-            text-align: center;
-        }
-
-        .gallery h2 {
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-item {
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e2e8f0;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        .lightbox-close:hover {
+            background: var(--accent-color);
         }
 
         /* قسم المطابقة والاعتماد */
@@ -1026,7 +281,6 @@ index-modified
            استعلامات الوسائط للهواتف والشاشات الصغيرة (Responsive) 
            ================================================== */
         @media (max-width: 768px) {
-            /* تعديلات الهيدر */
             header {
                 flex-direction: column;
                 gap: 1rem;
@@ -1038,10 +292,9 @@ index-modified
             }
             
             header .contact-btn {
-                width: 100%; /* زر الاتصال بعرض الشاشة في الجوال */
+                width: 100%;
             }
 
-            /* تعديلات القسم الرئيسي */
             .hero {
                 padding: 2.5rem 5%;
                 text-align: center;
@@ -1061,7 +314,6 @@ index-modified
                 padding: 0.8rem !important;
             }
 
-            /* تعديلات المسافات للأقسام */
             .features, .gallery, .compliance, footer {
                 padding: 2.5rem 5%;
             }
@@ -1071,13 +323,11 @@ index-modified
                 margin-bottom: 2rem;
             }
 
-            /* عرض عنصرين في كل صف للشبكات على الجوال */
             .features-grid, .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
 
-            /* تصغير حجم خطوط ومسافات كروت المميزات لتناسب المساحة الجديدة */
             .feature-card {
                 padding: 1rem;
             }
@@ -1097,7 +347,6 @@ index-modified
                 line-height: 1.4;
             }
 
-            /* تصغير حجم خطوط الفوتر */
             footer h2 {
                 font-size: 1.5rem;
             }
@@ -1109,6 +358,12 @@ index-modified
     </style>
 </head>
 <body>
+
+    <!-- نافذة عرض الصورة بالحجم الكامل -->
+    <div id="lightbox" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="صورة مكبرة">
+    </div>
 
     <!-- شريط التنقل -->
     <header>
@@ -1124,7 +379,7 @@ index-modified
             <a href="tel:0551453595" class="contact-btn" style="padding: 1rem 2rem; font-size: 1.3rem;">احصل على عرض سعر : 0551453595</a>
         </div>
         <div class="hero-image">
-            <img src="images/Screenshot_٢٠٢٦٠١٢٠_١٩٣٤٠٢_AliExpress.png" alt="نظام كاميرات المعدات الثقيلة مع شاشة العرض والـ DVR">
+            <img src="images/Screenshot_٢٠٢٦٠١٢٠_١٩٣٤٠٢_AliExpress.png" alt="نظام كاميرات المعدات الثقيلة مع شاشة العرض والـ DVR" onclick="openLightbox(this)">
         </div>
     </section>
 
@@ -1163,28 +418,28 @@ index-modified
         <h2>معرض صور النظام وتفاصيله</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٦٠٢_Alibabacom.png" alt="AI Blind Spot Detection">
+                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٦٠٢_Alibabacom.png" alt="AI Blind Spot Detection" onclick="openLightbox(this)">
             </div>
             <div class="gallery-item">
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٣٣٦_Temu.png" alt="Suitable for various sizes of vehicles">
+                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٣٣٦_Temu.png" alt="Suitable for various sizes of vehicles" onclick="openLightbox(this)">
             </div>
             <div class="gallery-item">
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٤١٢_Temu.png" alt="Package Content and Monitor Dimensions">
+                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٤١٢_Temu.png" alt="Package Content and Monitor Dimensions" onclick="openLightbox(this)">
             </div>
             <div class="gallery-item">
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٤٣٧_Temu.png" alt="4 Channels 360 Without Blind Spots">
+                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٤٣٧_Temu.png" alt="4 Channels 360 Without Blind Spots" onclick="openLightbox(this)">
             </div>
             <div class="gallery-item">
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٥٣٩_Alibabacom.png" alt="10 inch 4CH HD Camera System">
+                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٥٣٩_Alibabacom.png" alt="10 inch 4CH HD Camera System" onclick="openLightbox(this)">
             </div>
             <div class="gallery-item">
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٦٣٦_Alibabacom.png" alt="Monitor Interface and Setup">
+                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٦٣٦_Alibabacom.png" alt="Monitor Interface and Setup" onclick="openLightbox(this)">
             </div>
             <div class="gallery-item">
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٢٤٠_Temu.png" alt="System Components and Cables">
+                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٢٤٠_Temu.png" alt="System Components and Cables" onclick="openLightbox(this)">
             </div>
             <div class="gallery-item">
-                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٧٣٥_Alibabacom.png" alt="GPS and Android Features">
+                <img src="images/Screenshot_٢٠٢٦٠٧٢٠_٠٢٣٧٣٥_Alibabacom.png" alt="GPS and Android Features" onclick="openLightbox(this)">
             </div>
         </div>
     </section>
@@ -1203,7 +458,31 @@ index-modified
         <p>&copy; 2026 جميع الحقوق محفوظة.</p>
     </footer>
 
+    <!-- سكريبت جافاسكريبت لتشغيل نافذة تكبير الصور -->
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        function openLightbox(img) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+        }
+
+        // إغلاق النافذة عند الضغط على علامة الإغلاق
+        closeBtn.addEventListener('click', closeLightbox);
+
+        // إغلاق النافذة عند الضغط في أي مكان خارج الصورة
+        lightbox.addEventListener('click', function(e) {
+            if (e.target !== lightboxImg) {
+                closeLightbox();
+            }
+        });
+    </script>
+
 </body>
 </html>
-index-modified.html
-جارٍ عرض "index-modified.html". 
